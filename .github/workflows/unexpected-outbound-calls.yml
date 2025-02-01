@@ -1,13 +1,16 @@
 name: Unexpected Outbound Calls
 on:
   workflow_dispatch:
+permissions:
+  contents: read
+
 jobs:
   unexpected-outbound-calls:
     name: UnexpectedOutboundCalls
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@v2
+        uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
         with:
           egress-policy: audit
       - run: "curl https://attacker.com -L  || true"
